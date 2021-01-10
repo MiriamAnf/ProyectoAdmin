@@ -12,7 +12,7 @@ with open ("/var/log/nginx/access.log", "r", encoding="utf8") as f:
         line = f.readline()
         if not line:
             break
-        ip = line.split("")[0]
+        ip = line.split(" ")[0]
         ip_counter = counter.update({ip: 1})
         sorted_counter = {}
         sorted_ip_counter = sorted(counter, key=counter.get, reverse=True)
