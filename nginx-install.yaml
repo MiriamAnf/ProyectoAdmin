@@ -26,12 +26,6 @@
       dest: /lib/systemd/system/
       remote_src: yes
       mode: "0644"
-  - name: Copy timer in systemd
-    copy:
-      src: /home/miriamanf/ProyectoAdmin/metrics-reporter.timer
-      dest: /lib/systemd/system
-      remote_src: yes
-      mode: "0644"
   - name: Run metrics-reporter
     systemd:
       state: started
