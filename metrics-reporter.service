@@ -1,0 +1,6 @@
+[web]
+Description=Generate nginx access log report
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/miriamanf/ProyectoAdmin/metrics-reporter.py
