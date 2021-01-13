@@ -1,0 +1,9 @@
+[Unit]
+Description=Run metrics reports every half an hour
+
+[Timer]
+OnCalendar=*:0/30
+Persistent=True
+
+[Install]
+WantedBy=timers.target
