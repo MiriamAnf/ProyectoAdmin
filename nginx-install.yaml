@@ -1,0 +1,50 @@
+- hosts: all
+  tasks:
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+  - name: Start nginx
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+  - name: Install git
+    apt:
+      name: git
+      state: latest
+      update_cache: yes
+  - name: Clone repository
+    git:
+      repo: https://github.com/MiriamAnf/ProyectoAdmin
+      dest: /home/miriamanf/ProyectoAdmin
+      clone: yes
+  - name: Copy service in systemd
+    copy:
+      src: /home/miriamanf/ProyectoAdmin/metrics-reporter.service
+      dest: /lib/systemd/system/
+      remote_src: yes
+      mode: "0644"
+  - name: Copy timer in systemd
+    copy:
+      src: /home/miriamanf/ProyectoAdmin/metrics-reporter.timer
+      dest: /lib/systemd/system
+      remote_src: yes
+      mode: "0644"
+  - name: Run metrics-reporter
+    systemd:
+      state: started
+      daemon_reload: yes
+      name: metrics-reporter 
+  - name: Copy timer in systemd
+    copy:
+      src: /home/miriamanf/ProyectoAdmin/metrics-reporter.timer
+      dest: /lib/systemd/system
+      remote_src: yes
+      mode: "0644"
+  - name: Enable timer
+    systemd:
+      name: metrics-reporter.timer
+      state: started
+      enabled: yes
